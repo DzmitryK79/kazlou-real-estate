@@ -1,0 +1,36 @@
+{
+  "updated_at": "2026-10-21",
+  "disclaimer": "Стратегические целевые показатели, не фактические результаты",
+  "dubai_2040": {
+    "base_population_2020": 3300000,
+    "target_population_2040": 5800000,
+    "daytime_base_2020": 4500000,
+    "daytime_target_2040": 7800000,
+    "urban_centres": [
+      "Deira and Bur Dubai",
+      "Downtown and Business Bay",
+      "Dubai Marina and JBR",
+      "Expo 2020 Centre",
+      "Dubai Silicon Oasis Centre"
+    ],
+    "source": "https://www.mediaoffice.ae/en/news/2021/march/13-03/mohammed-bin-rashid",
+    "source_date": "2021-03-13",
+    "status": "target"
+  },
+  "blue_line": {
+    "length_km": 30,
+    "stations": 14,
+    "underground_km": 15.5,
+    "elevated_km": 14.5,
+    "capital_cost_aed": 20500000000,
+    "target_open_date": "2029-09-09",
+    "status": "under_construction",
+    "source": "https://www.rta.ae/wps/portal/rta/ae/home/news-and-media/all-news/NewsDetails/mohammed-bin-rashid-launches-tunnelling-works-for-dubai-metro-blue-line",
+    "source_date": "2026-05-03"
+  },
+  "d33": {
+    "target": "Double Dubai's economy by 2033",
+    "status": "policy_goal",
+    "source": "https://www.investindubai.gov.ae/en/why-dubai/d33-agenda"
+  }
+}
