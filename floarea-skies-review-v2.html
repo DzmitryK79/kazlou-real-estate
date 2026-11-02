@@ -336,19 +336,17 @@ html body main.presentation section.dubai-folders-slide::before{background:radia
 <div class="fs-row"><span>Цена квартиры</span><b>1 244 000 AED</b></div>
 <div class="fs-row"><span>DLD 4% + Admin fee</span><b>53 760 AED</b></div>
 <div class="fs-row fs-resale-total"><span>Полная стоимость входа</span><b>1 297 760 AED</b></div>
-<div class="fs-row"><span>Комиссия брокера · 2%</span><b id="fsResaleFee">29 000 AED</b></div>
-<div class="fs-row"><span>NOC / оформление</span><b>5 000 AED</b></div>
 </div>
 </div>
 <div class="fs-glass fs-resale-results">
 <div class="fs-resale-kpi"><span>Цена продажи</span><strong id="fsResaleOut">1 450 000 AED</strong></div>
-<div class="fs-resale-kpi"><span>Прибыль после расходов</span><strong id="fsResaleProfit">118 240 AED</strong></div>
-<div class="fs-resale-kpi fs-resale-roi"><span>ROI на полную стоимость входа</span><strong id="fsResaleROI">9,11%</strong></div>
-<div class="fs-resale-bar"><div id="fsResaleBar" style="width:9.11%"></div></div>
-<p class="fs-resale-formula">Продажа − стоимость входа − брокер − NOC</p>
+<div class="fs-resale-kpi"><span>Разница между продажей и стоимостью входа</span><strong id="fsResaleProfit">152 240 AED</strong></div>
+<div class="fs-resale-kpi fs-resale-roi"><span>ROI на полную стоимость входа</span><strong id="fsResaleROI">11,73%</strong></div>
+<div class="fs-resale-bar"><div id="fsResaleBar" style="width:11.73%"></div></div>
+<p class="fs-resale-formula">Цена продажи − полная стоимость входа</p>
 </div>
 </div>
-<p class="fs-resale-note">Модель учитывает условную комиссию 2% и NOC 5 000 AED. Не включены возможные расходы на владение, финансирование и налоги. Условия сделки могут отличаться.</p>
+
 </div></section><section class="slide fs-slide fs-mortgage fs-mortgage-pro"><div class="content fs-inner">
 <div class="eyebrow">18 / ФИНАНСИРОВАНИЕ · ИНТЕРАКТИВНО</div>
 <h2>Квартира в ипотеку: платёж и остаток</h2>
@@ -474,13 +472,12 @@ bbq:{title:'Зона BBQ',desc:'Пространство для отдыха и 
 reading:{title:'Читальный уголок',desc:'Тихое пространство для чтения и отдыха.',url:'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1400&q=85',alt:'Иллюстративная фотография уютного интерьера',render:false}
 };const photo=document.getElementById('fsAmenityImg'),graphic=document.getElementById('fsAmenityGraphic'),source=document.getElementById('fsAmenitySource');function choose(key){const d=data[key];if(!d)return;root.querySelectorAll('[data-fs-amenity]').forEach(btn=>{const selected=btn.dataset.fsAmenity===key;btn.classList.toggle('active',selected);btn.setAttribute('aria-pressed',String(selected))});document.getElementById('fsAmenityTitle').textContent=d.title;document.getElementById('fsAmenityDescription').textContent=d.desc;document.getElementById('fsAmenityLabel').textContent=d.label||d.title;if(d.url){photo.src=d.url;photo.alt=d.alt;photo.hidden=false;graphic.hidden=true;source.textContent=d.render?'Рендер проекта Floareá Skies. Окончательный вид уточняется по документации девелопера.':'Тематическое иллюстративное фото, не визуализация Floareá Skies.'}else{photo.hidden=true;graphic.hidden=true;source.textContent='Изображение для этой зоны недоступно.'}}root.querySelectorAll('[data-fs-amenity]').forEach(btn=>btn.addEventListener('click',()=>choose(btn.dataset.fsAmenity)));choose('pool')})();</script><script id="fs-resale-new-js">(function(){
 const slider=document.getElementById('fsResalePrice');if(!slider)return;
-const price0=1244000,dld=49760,admin=4000,entry=price0+dld+admin,noc=5000;
+const price0=1244000,dld=49760,admin=4000,entry=price0+dld+admin;
 const money=v=>Math.round(v).toLocaleString('ru-RU')+' AED';
 const pct=v=>v.toFixed(2).replace('.',',')+'%';
-function update(){const sale=Number(slider.value),fee=sale*0.02,profit=sale-entry-fee-noc,roi=profit/entry*100;
+function update(){const sale=Number(slider.value),profit=sale-entry,roi=profit/entry*100;
 document.getElementById('fsResalePriceValue').textContent=money(sale);
 document.getElementById('fsResaleOut').textContent=money(sale);
-document.getElementById('fsResaleFee').textContent=money(fee);
 document.getElementById('fsResaleProfit').textContent=money(profit);
 document.getElementById('fsResaleROI').textContent=pct(roi);
 document.getElementById('fsResaleBar').style.width=Math.max(0,Math.min(100,roi))+'%';
