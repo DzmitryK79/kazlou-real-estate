@@ -391,9 +391,9 @@ $('fsNet').textContent=money(rent-sc);$('fsNetYield').textContent=(100*(rent-sc)
 function updateMortgage(){
 if(!$('fsmPrice'))return;
 const price=Math.max(100000,val('fsmPrice',1244000)),resident=$('fsmResident').value,purpose=$('fsmPurpose').value,age=Math.min(75,Math.max(21,val('fsmAge',40)));
-const cap=resident==='resident'?(purpose==='home'?80:75):60;const minDown=100-cap;
-$('fsmDown').min=String(minDown);
-let down=val('fsmDown',20);if(down<minDown){down=minDown;$('fsmDown').value=String(down)}
+const cap=resident==='resident'?(purpose==='home'?80:75):60;const guideDown=100-cap;
+$('fsmDown').min='20';
+let down=Math.max(20,val('fsmDown',20));
 const maxYears=Math.max(1,Math.min(25,65-age));
 $('fsmYears').max=String(maxYears);let years=val('fsmYears',25);if(years>maxYears){years=maxYears;$('fsmYears').value=String(years)}
 const rate=Math.max(0,val('fsmRate',5)),svc=val('fsmService',14),rent=val('fsmRent',80000);
@@ -401,14 +401,14 @@ const loan=price*(1-down/100),r=rate/1200,n=years*12;
 const monthly=r===0?loan/n:loan*r/(1-Math.pow(1+r,-n));
 const annual=monthly*12,service=svc*837.11,net=rent-annual-service;
 $('fsmDownLabel').textContent=down+'%';$('fsmYearsLabel').textContent=String(years);$('fsmServiceLabel').textContent=String(svc);$('fsmRentLabel').textContent=money(rent);
-$('fsmDownHint').textContent='Модельный лимит кредита '+cap+'%; минимальный взнос '+minDown+'%';
+$('fsmDownHint').textContent=down<guideDown?'Выбранный взнос ниже модельного банковского ориентира '+guideDown+'%':'Банковский ориентир по взносу: от '+guideDown+'%';
 $('fsmYearsHint').textContent='Макс. '+maxYears+' лет при расчётном пределе возраста 65 лет';
 $('fsmDownCash').textContent=money(price-loan);$('fsmLoan').textContent=money(loan);$('fsmMonthly').textContent=money(monthly);$('fsmAnnual').textContent=money(annual);$('fsmServiceYear').textContent=money(service);$('fsmRemainder').textContent=money(net);
 $('fsmFlowRent').textContent=money(rent);$('fsmFlowAnnual').textContent=money(annual);$('fsmFlowServiceAmount').textContent=money(service);$('fsmFlowNet').textContent=money(net);
 $('fsmRemainder').closest('.fsm-remaining').classList.toggle('negative',net<0);
 const total=Math.max(rent,annual+service),p1=Math.min(100,100*annual/total),p2=Math.min(100-p1,100*service/total),p3=Math.max(0,100-p1-p2);
 $('fsmFlowBank').style.width=p1+'%';$('fsmFlowService').style.width=p2+'%';$('fsmFlowBalance').style.width=p3+'%';
-$('fsmNotice').textContent='Модельные лимиты LTV и срока не являются банковским одобрением. Платёж аннуитетный; первоначальные сборы и иные расходы в расчёт остатка не включены.';
+$('fsmNotice').textContent=(down<guideDown?'Внимание: выбранный взнос '+down+'% ниже модельного минимума '+guideDown+'% для этого профиля. Финансирование на таких условиях может быть недоступно. ':'')+'Расчёт иллюстративный, не является банковским одобрением. Дополнительные расходы не включены.';
 }
 ['fsRent','fsService'].forEach(id=>$(id)?.addEventListener('input',updateRent));
 ['fsmPrice','fsmResident','fsmPurpose','fsmAge','fsmDown','fsmYears','fsmRate','fsmService','fsmRent'].forEach(id=>{$(id)?.addEventListener('input',updateMortgage);$(id)?.addEventListener('change',updateMortgage)});
